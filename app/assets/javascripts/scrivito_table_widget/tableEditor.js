@@ -6,19 +6,28 @@
       return $(element).is('.scrivito-table-editor');
     },
     activate: function(element) {
+      var activeWidget = null;
+
       $(element).on('click', function(event) {
-        $(element).edittable(event);
 
         if (!$(this).data('medium-editor-element')) {
           scrivito.editors.medium_editor.activate(element);
         }
+
+        activeWidget = $(element).edit_table({
+          update: function(_, data) {
+            $(element).scrivito('save', data.html);
+          }
+        });
+
         event.stopPropagation();
       });
 
       $('body').on('click', function(event) {
         if(!$(event.target).parents('.table-buttons').length && !$(event.target).parents('.table-options').length) {
-          var response = $.fn.edittable.clear();
-          if(response != undefined) return $(response.cmsField).scrivito('save', response.text);
+
+          if ((activeWidget != null) && (activeWidget.is(':scrivito-edit_table')))
+            activeWidget.edit_table('destroy');
         }
       });
     }

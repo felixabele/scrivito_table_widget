@@ -1,143 +1,86 @@
-.table-buttons {
-  position: absolute;
-  margin: 0;
-  overflow: hidden;
-  z-index: 2;
+.scrivito-table-editor {
+  overflow: visible !important;
 }
 
-.table-buttons div,
-.table-options div {
-  float: left;
-  min-width: 22px;
-  height: 22px;
-  font-size: 13px;
-  line-height: 13px;
+.scrivito-table-editor tr td,
+.scrivito-table-editor tr th {
+  position: relative;
+  height: 40px;
+}
+
+.scrivito-table-editor tr .highlight {
+  background-color: rgba(147, 187, 44, 0.2);
+}
+
+.scrivito-table-editor tr .highlight-delete,
+.scrivito-table-editor tr.highlight-delete td,
+.scrivito-table-editor tr.highlight-delete th {
+  background-color: rgba(215, 40, 40, 0.3);
+}
+
+.scrivito-table-editor tr .highlight-merge,
+.scrivito-table-editor tr.highlight-merge td,
+.scrivito-table-editor tr.highlight-merge th {
+  background-color: rgba(180, 180, 180, 0.2);
+}
+
+.scrivito-table-editor tr.highlight-bottom td,
+.scrivito-table-editor tr.highlight-bottom th {
+  border-bottom: 3px solid rgba(67,148,57,0.8);
+}
+
+.scrivito-table-editor tr.highlight-top td,
+.scrivito-table-editor tr.highlight-top th {
+  border-top: 3px solid rgba(67,148,57,0.8);
+}
+
+.scrivito-table-editor tr .highlight-left {
+  border-left: 3px solid rgba(67,148,57,0.8);
+}
+
+.scrivito-table-editor tr .highlight-right {
+  border-right: 3px solid rgba(67,148,57,0.8);
+}
+
+#table_editor_cell_menu a {
+  position: absolute;
+  padding: inherit;
+  cursor: pointer;
+  height: 16px;
+  width: 16px;
+  line-height: 16px;
+  background-color: rgba(67,148,57,0.5);
+  z-index: 30;
   text-align: center;
   color: #fff;
-  cursor: pointer;
-  margin-right: 1px;
-  margin-bottom: 1px;
-  padding: 4px 6px;
+  border-radius: 3px;
 }
 
-.table-options div {
-  margin-bottom: 0;
+.table-editor-toggle-menu {
+  float: left;
 }
 
-.table-buttons.edit {
-  width: auto;
-  z-index: 111113;
+#table_editor_table_menu {
+  margin-bottom: 10px;
 }
 
-.table-options.main {
-  width: auto;
+#table_editor_table_menu a {
+  margin-right: 4px;
 }
 
-.table-buttons.edit div.alert-gray,
-.table-options div {
-  background: #444444;
-}
+#table_editor_cell_menu .add_row_below  { bottom: -8px; left: calc(50% - 8px); }
+#table_editor_cell_menu .add_row_top    { top: -8px; left: calc(50% - 8px); }
+#table_editor_cell_menu .add_col_left   { bottom: calc(50% - 8px); left: -8px; }
+#table_editor_cell_menu .add_col_right  { top: calc(50% - 8px); right: -8px; }
+#table_editor_cell_menu .merge_left     { bottom: calc(50% - 8px); left: -26px; }
+#table_editor_cell_menu .merge_right    { top: calc(50% - 8px); right: -26px; }
+#table_editor_cell_menu .delete_column  { bottom: -8px; left: calc(50% + 10px); }
+#table_editor_cell_menu .delete_row     { bottom: -8px; left: -8px }
+#table_editor_cell_menu .cell_styles    { top: -8px; left: -8px; }
+#table_editor_cell_menu .split_column   { top: -8px; right: -8px; }
 
-.table-buttons div.table-bold {
-  font-weight: bold;
-}
-
-.table-buttons div.table-italic {
-  font-style: italic;
-}
-
-.table-buttons div.delete-row,
-.table-buttons div.delete-column {
-  background-color: #c5463f;
-}
-
-.table-buttons div.add-top,
-.table-buttons div.add-bottom,
-.table-buttons div.add-left,
-.table-buttons div.add-right {
-  background-color: #439439;
-}
-
-.table-options {
+#table_editor_cell_styles {
   position: absolute;
-  top: -32px;
-  margin: 0;
-  overflow: hidden;
-}
-
-.table-buttons.left div {
-  float: none;
-}
-
-.table-buttons.top {
-  height: 25px;
-  z-index: 111112;
-}
-
-.table-buttons.top .add-left {
-  position: absolute;
-  left: 0;
-}
-
-.table-buttons.top .add-right {
-  position: absolute;
-  right: 0;
-}
-
-.table-buttons.left {
-  width: 25px;
-  z-index: 111112;
-}
-
-.table-buttons.left .add-top {
-  position: absolute;
-  top: 0;
-}
-
-.table-buttons.left .add-bottom {
-  position: absolute;
-  bottom: 0;
-}
-
-.table-widget {
-  position: relative;
-}
-
-.table-options .alert-success {
-  margin-left: 5px;
-}
-
-.helper-line {
-  position: absolute;
-  display: none;
-  z-index: 100000;
-}
-
-.delete-marker td,
-.delete-marker th,
-th.delete-marker,
-td.delete-marker,
-tr.delete-marker {
-  background-color: #c5463f !important;
-  color: white !important;
-  border-color: #A33C36 !important;
-}
-
-td.active-field {
-  outline: 2px solid #444;
-}
-
-.table-options.main div,
-.table-buttons.edit div {
-  display: none;
-}
-
-.table-options.main div:first-child,
-.table-buttons.edit div:first-child {
-  display: block;
-}
-
-[data-scrivito-display-mode='editing'] table td:focus,
-[data-scrivito-display-mode='editing'] table th:focus {
-  outline: 2px dotted #439439 !important;
+  z-index: 31;
+  background: rgba(255, 255, 255, 0.8);
 }

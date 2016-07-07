@@ -1,31 +1,3 @@
-table.table td.bold {
-  font-weight: bold;
-}
-
-table.table th.bold {
-  font-weight: normal;
-}
-
-table.table th.italic,
-table.table td.italic {
-  font-style: italic;
-}
-
 table.table.column-first tr td:first-child {
   font-weight: bold;
-}
-
-table.table th.left,
-table.table td.left {
-  text-align: left;
-}
-
-table.table th.center,
-table.table td.center {
-  text-align: center;
-}
-
-table.table th.right,
-table.table td.right {
-  text-align: right;
 }
