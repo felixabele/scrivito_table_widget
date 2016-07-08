@@ -5,7 +5,7 @@ $(function() {
 
     options: {
       class_name: 'scrivito-table-editor',
-      presetContent: '',
+      presetContent: 'Content',
       table_classes: {
         'table-striped': 'Striped',
         'table-condensed': 'Condensed',
@@ -56,14 +56,11 @@ $(function() {
 
     // Initialize
     _create: function() {
+      var table = this;
       this.element.addClass(this.options.class_name);
       this.cellStyles = $.unique(this.options.cell_styles.map(function(a) {
         return Object.keys(a.css)[0]
       }));
-
-      this._createContextMenu();
-      this._createTableMenu();
-      this._createCellStyleMenu();
 
       if (this.element.find('table').length) {
         this.parseHtml();
@@ -71,8 +68,17 @@ $(function() {
         this.matrix = [[{ colspan: 1, rowspan: 1, content: '' }]];
       }
 
+      this._createContextMenu();
+      this._createTableMenu();
+      this._createCellStyleMenu();
+
       this.renderHtml();
       this._reloadTableClasses();
+
+      $(window).resize(function() {
+        if (table.activeCell)
+          table._attachMenuToCell(table.activeCell);
+      });
 
       if(!this.keysBound) {
         this._bindKeys();
@@ -163,6 +169,18 @@ $(function() {
       });
     },
 
+    _attachMenuToCell: function(cell) {
+      this.$contextMenu.css({
+        width: cell.element.outerWidth(),
+        height: cell.element.outerHeight(),
+      });
+      this.$contextMenu.position({
+        my: "left top",
+        at: "left top",
+        of: cell.element
+      });
+    },
+
     _onCellActionClick: function(cell) {
 
       if (!cell.element.hasClass('highlight')) {
@@ -170,11 +188,11 @@ $(function() {
         this.element.find('td, th').removeClass('highlight');
         cell.element.addClass('highlight');
 
-        cell.element.append(this.$contextMenu.detach());
         this.$contextMenu.unbind('click');
         this._initClickHandler();
         this._initHighlightHandler();
         this.$contextMenu.show();
+        this._attachMenuToCell(cell);
         this.$cellStyleMenu.hide();
 
         this.$contextMenu.find('a.merge_right').toggle(
@@ -312,7 +330,6 @@ $(function() {
       if (this.activeCell != null) {
         this.activeCell.element.removeClass('highlight');
         this.activeCell = null;
-        this.$contextMenu.detach()
       }
     },
 

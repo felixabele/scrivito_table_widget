@@ -5,7 +5,6 @@
 .scrivito-table-editor tr td,
 .scrivito-table-editor tr th {
   position: relative;
-  height: 40px;
 }
 
 .scrivito-table-editor tr .highlight {
@@ -54,6 +53,10 @@
   text-align: center;
   color: #fff;
   border-radius: 3px;
+}
+
+#table_editor_cell_menu {
+  position: absolute;
 }
 
 .table-editor-toggle-menu {
