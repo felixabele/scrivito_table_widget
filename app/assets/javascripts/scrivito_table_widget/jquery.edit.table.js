@@ -5,7 +5,7 @@ $(function() {
 
     options: {
       class_name: 'scrivito-table-editor',
-      presetContent: 'Content',
+      presetContent: '',
       table_classes: {
         'table-striped': 'Striped',
         'table-condensed': 'Condensed',
@@ -57,6 +57,7 @@ $(function() {
     // Initialize
     _create: function() {
       var table = this;
+
       this.element.addClass(this.options.class_name);
       this.cellStyles = $.unique(this.options.cell_styles.map(function(a) {
         return Object.keys(a.css)[0]
@@ -202,7 +203,6 @@ $(function() {
         this.$contextMenu.find('a.merge_left').toggle(
           !this._isFirstVisibleCell(cell.row_index, cell.col_index)
         );
-
         this.$contextMenu.find('a.delete_row').toggle(this.rowCount() > 1);
         this.$contextMenu.find('a.delete_column').toggle((this.colCount() > 1) && this._canDeleteColumn());
         this.$contextMenu.find('a.split_column').toggle(cell.colspan > 1);
@@ -489,18 +489,24 @@ $(function() {
 
         $(this).find('th,td').each(function() {
           var $cell = $(this),
-              cellStyle = {};
+              cellData = {
+                colspan: parseInt($cell.attr('colspan')) || 1,
+                rowspan: parseInt($cell.attr('rowspan')) || 1,
+                content: $cell.html(),
+                style: {},
+                css_class: $cell.attr('class'),
+              };
 
           $.each(table.cellStyles, function(_, cssProp) {
-            cellStyle[cssProp] = $cell.css(cssProp);
+            cellData.style[cssProp] = $cell.css(cssProp);
           });
-          cells.push({
-            colspan: parseInt($cell.attr('colspan')) || 1,
-            rowspan: parseInt($cell.attr('rowspan')) || 1,
-            content: $cell.html(),
-            style: cellStyle,
-            css_class: $cell.attr('class'),
-          });
+
+          cells.push(cellData);
+
+          // add invisible cells if the cells spans
+          for (var i=1; i<cellData.colspan; i++) {
+            cells.push({ colspan: 0, rowspan: 0, content: '', style: {}, css_class: '' });
+          }
         });
         table.matrix.push(cells);
       });

@@ -26,10 +26,11 @@ scrivito.select_editor(function(element, editor) {
 
 ## Configuration
 
-You can change the list of available background colors setting the defaults like:
+You can customize all widget settings by overwritting the default options:
 
 ```js
-$.fn.edittable.defaults.colorClasses = ['your', 'background', 'class', 'names']
+const myOptions = { presetContent: 'Placeholder' };
+$.extend($.scrivito.edit_table.prototype.options, myOptions);
 ```
 
 Please make sure, that you have set the background colors for the named class in your css.
