@@ -118,7 +118,7 @@ $(function() {
       var table = this;
 
       table.$contextMenu = $('<div>').attr('id', 'table_editor_cell_menu').hide();
-      table.element.append(this.$contextMenu);
+      table.element.before(this.$contextMenu);
 
       $.each(this.options.cell_actions, function(action, opt) {
         var $btn = $('<a>')
@@ -171,6 +171,8 @@ $(function() {
     },
 
     _attachMenuToCell: function(cell) {
+      if (cell == undefined) return;
+
       this.$contextMenu.css({
         width: cell.element.outerWidth(),
         height: cell.element.outerHeight(),
@@ -318,6 +320,7 @@ $(function() {
       var table = this;
       $('body').keyup(function(e) {
         table._triggerUpdate();
+        table._attachMenuToCell(table.activeCell);
       });
       this.keysBound = true;
     },
