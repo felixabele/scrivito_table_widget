@@ -24,8 +24,7 @@
       });
 
       $('body').on('click', function(event) {
-        if(!$(event.target).parents('#table_editor_cell_menu').length && !$(event.target).parents('#table_editor_cell_styles').length) {
-
+        if (!$(event.target).parents('#table_editor_cell_menu, #table_editor_cell_styles, .medium-editor-toolbar').length) {
           if ((activeWidget != null) && (activeWidget.is(':scrivito-edit_table')))
             activeWidget.edit_table('destroy');
         }

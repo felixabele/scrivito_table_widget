@@ -238,7 +238,7 @@ $(function() {
 
     _highlightColumn: function(cl) {
       $.each(this._activeColumn(), function() {
-        if (this != undefined)
+        if ((this != undefined) && (this.element != undefined))
           this.element.addClass(cl);
       })
     },
